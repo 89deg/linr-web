@@ -266,8 +266,8 @@
                             <!-- Voice-to-Text Transformation -->
                             <div class="rounded-2xl bg-surface-container-high border border-outline-variant/30 overflow-hidden p-6 md:p-8 flex flex-col">
                                 <!-- Spoken text (raw, casual) -->
-                                <div class="flex-1 flex flex-col">
-                                    <div class="flex items-center gap-2 mb-4">
+                                <div class="bg-surface-container rounded-xl p-5 border border-outline-variant/20">
+                                    <div class="flex items-center gap-2 mb-3">
                                         <span class="material-symbols-outlined filled text-gold text-lg">mic</span>
                                         <span class="text-xs text-gold/70 font-mono uppercase tracking-wider" data-i18n="voice.spoken_label">Gesprochen</span>
                                         <div class="flex gap-[3px] ml-2 items-center voice-waveform">
@@ -280,11 +280,11 @@
                                             <div class="w-[3px] rounded-full bg-gold/40 animate-wave-1 h-2"></div>
                                         </div>
                                     </div>
-                                    <p class="text-on-surface-variant/70 text-sm md:text-base leading-relaxed italic flex-1" data-i18n="voice.spoken_text">"Also heute war irgendwie so ein komischer Tag weißt du, erst hat's geregnet und ich bin trotzdem joggen gegangen und danach hab ich mich richtig gut gefühlt, so befreit irgendwie..."</p>
+                                    <p class="text-on-surface-variant/70 text-sm leading-relaxed italic" data-i18n="voice.spoken_text">"Also heute war irgendwie so ein komischer Tag weißt du, erst hat's geregnet und ich bin trotzdem joggen gegangen und danach hab ich mich richtig gut gefühlt, so befreit irgendwie..."</p>
                                 </div>
 
                                 <!-- Transformation arrow -->
-                                <div class="flex items-center gap-3 my-5">
+                                <div class="flex items-center gap-3 my-4">
                                     <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
                                     <div class="w-8 h-8 rounded-full bg-gold-container flex items-center justify-center">
                                         <span class="material-symbols-outlined text-gold text-base">arrow_downward</span>
@@ -293,19 +293,17 @@
                                 </div>
 
                                 <!-- Formatted diary entry -->
-                                <div class="flex-1 flex flex-col">
-                                    <div class="flex items-center gap-2 mb-4">
+                                <div class="bg-surface-container rounded-xl p-5 border border-outline-variant/20">
+                                    <div class="flex items-center gap-2 mb-3">
                                         <span class="material-symbols-outlined filled text-gold text-lg">auto_awesome</span>
                                         <span class="text-xs text-gold/70 font-mono uppercase tracking-wider" data-i18n="voice.result_label">Tagebucheintrag</span>
                                     </div>
-                                    <div class="bg-surface-container rounded-xl p-5 border border-outline-variant/20 flex-1">
-                                        <p class="text-white text-sm md:text-base font-medium mb-2" data-i18n="voice.result_title">Regen, Joggen & ein gutes Gefühl</p>
-                                        <p class="text-on-surface-variant text-sm leading-relaxed" data-i18n="voice.result_text">Heute trotz Regen joggen gegangen — und es hat sich unglaublich gut angefühlt. Danach dieses befreite Gefühl, das ich schon lange nicht mehr hatte. Manchmal braucht es genau das: einfach machen, egal wie das Wetter ist.</p>
-                                        <div class="flex gap-2 mt-4">
-                                            <span class="text-xs px-2.5 py-1 rounded-full bg-gold-container text-gold" data-i18n="voice.tag1">Bewegung</span>
-                                            <span class="text-xs px-2.5 py-1 rounded-full bg-gold-container text-gold" data-i18n="voice.tag2">Gutes Gefühl</span>
-                                            <span class="text-xs px-2.5 py-1 rounded-full bg-gold-container text-gold">78%</span>
-                                        </div>
+                                    <p class="text-white text-sm font-medium mb-2" data-i18n="voice.result_title">Regen, Joggen & ein gutes Gefühl</p>
+                                    <p class="text-on-surface-variant text-sm leading-relaxed" data-i18n="voice.result_text">Heute trotz Regen joggen gegangen — und es hat sich unglaublich gut angefühlt. Danach dieses befreite Gefühl, das ich schon lange nicht mehr hatte. Manchmal braucht es genau das: einfach machen, egal wie das Wetter ist.</p>
+                                    <div class="flex flex-wrap gap-2 mt-3">
+                                        <span class="text-xs px-2.5 py-1 rounded-full bg-gold-container text-gold" data-i18n="voice.tag1">Bewegung</span>
+                                        <span class="text-xs px-2.5 py-1 rounded-full bg-gold-container text-gold" data-i18n="voice.tag2">Gutes Gefühl</span>
+                                        <span class="text-xs px-2.5 py-1 rounded-full bg-gold-container text-gold">78%</span>
                                     </div>
                                 </div>
                             </div>
