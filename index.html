@@ -70,6 +70,14 @@
             background: rgba(200, 169, 98, 0.3);
             color: #fff;
         }
+        /* Voice waveform animation */
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.8); }
+        }
+        .animate-wave-1 { animation: wave 0.8s ease-in-out infinite; }
+        .animate-wave-2 { animation: wave 0.8s ease-in-out infinite 0.15s; }
+        .animate-wave-3 { animation: wave 0.8s ease-in-out infinite 0.3s; }
         /* Hide scrollbar for bento overflow on mobile */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -232,15 +240,51 @@
                     </div>
                     <div class="fade-in fade-in-delay-2 order-1 md:order-2">
                         <div class="relative py-6">
-                            <!-- Placeholder für Feature-Screenshot -->
-                            <div class="rounded-2xl bg-surface-container-high border border-outline-variant/30 overflow-hidden aspect-[4/5] flex items-center justify-center">
-                                <div class="text-center px-8">
-                                    <span class="material-symbols-outlined filled text-gold/40 text-8xl mb-4 block">mic</span>
-                                    <p class="text-on-surface-variant text-sm" data-i18n="voice.screenshot">Screenshot: Spracheingabe</p>
+                            <!-- Voice-to-Text Transformation -->
+                            <div class="rounded-2xl bg-surface-container-high border border-outline-variant/30 overflow-hidden p-6 md:p-8 voice-transform-container">
+                                <!-- Spoken text (raw, casual) -->
+                                <div class="voice-spoken mb-6">
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <span class="material-symbols-outlined filled text-gold text-lg">mic</span>
+                                        <span class="text-xs text-gold/70 font-mono uppercase tracking-wider" data-i18n="voice.spoken_label">Gesprochen</span>
+                                        <div class="flex gap-[3px] ml-2 items-center voice-waveform">
+                                            <div class="w-[3px] rounded-full bg-gold/40 animate-wave-1 h-3"></div>
+                                            <div class="w-[3px] rounded-full bg-gold/40 animate-wave-2 h-4"></div>
+                                            <div class="w-[3px] rounded-full bg-gold/40 animate-wave-3 h-2"></div>
+                                            <div class="w-[3px] rounded-full bg-gold/40 animate-wave-1 h-5"></div>
+                                            <div class="w-[3px] rounded-full bg-gold/40 animate-wave-2 h-3"></div>
+                                            <div class="w-[3px] rounded-full bg-gold/40 animate-wave-3 h-4"></div>
+                                            <div class="w-[3px] rounded-full bg-gold/40 animate-wave-1 h-2"></div>
+                                        </div>
+                                    </div>
+                                    <p class="text-on-surface-variant/70 text-sm md:text-base leading-relaxed italic" data-i18n="voice.spoken_text">"Also heute war irgendwie so ein komischer Tag weißt du, erst hat's geregnet und ich bin trotzdem joggen gegangen und danach hab ich mich richtig gut gefühlt, so befreit irgendwie..."</p>
                                 </div>
-                            </div>
-                            <div class="absolute -top-4 -right-4 glass-card p-4 rounded-xl shadow-lg">
-                                <p class="font-logo font-semibold text-gold text-sm italic" data-i18n="voice.quote">"Heute war ein guter Tag..."</p>
+
+                                <!-- Transformation arrow -->
+                                <div class="flex items-center gap-3 my-5">
+                                    <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
+                                    <div class="w-8 h-8 rounded-full bg-gold-container flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-gold text-base">arrow_downward</span>
+                                    </div>
+                                    <div class="flex-1 h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
+                                </div>
+
+                                <!-- Formatted diary entry -->
+                                <div class="voice-result">
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <span class="material-symbols-outlined filled text-gold text-lg">auto_awesome</span>
+                                        <span class="text-xs text-gold/70 font-mono uppercase tracking-wider" data-i18n="voice.result_label">Tagebucheintrag</span>
+                                    </div>
+                                    <div class="bg-surface-container rounded-xl p-5 border border-outline-variant/20">
+                                        <p class="text-white text-sm md:text-base font-medium mb-2" data-i18n="voice.result_title">Regen, Joggen & ein gutes Gefühl</p>
+                                        <p class="text-on-surface-variant text-sm leading-relaxed" data-i18n="voice.result_text">Heute trotz Regen joggen gegangen — und es hat sich unglaublich gut angefühlt. Danach dieses befreite Gefühl, das ich schon lange nicht mehr hatte. Manchmal braucht es genau das: einfach machen, egal wie das Wetter ist.</p>
+                                        <div class="flex gap-2 mt-4">
+                                            <span class="text-xs px-2.5 py-1 rounded-full bg-gold-container text-gold" data-i18n="voice.tag1">Bewegung</span>
+                                            <span class="text-xs px-2.5 py-1 rounded-full bg-gold-container text-gold" data-i18n="voice.tag2">Gutes Gefühl</span>
+                                            <span class="text-xs px-2.5 py-1 rounded-full bg-gold-container text-gold">78%</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
