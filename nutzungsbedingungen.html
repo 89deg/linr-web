@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Nutzungsbedingungen — LINR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "gold": "#F9EAC5",
+                        "surface": "#0f0f0f",
+                        "surface-container": "#1a1a1a",
+                        "surface-container-low": "#141414",
+                        "on-surface": "#e8e8e8",
+                        "on-surface-variant": "#a0a0a0",
+                        "outline-variant": "#333333",
+                    },
+                    fontFamily: {
+                        "logo": ["Quicksand", "sans-serif"],
+                        "body": ["Inter", "system-ui", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased">
+    <nav class="w-full bg-surface/80 backdrop-blur-lg border-b border-outline-variant/20">
+        <div class="flex justify-between items-center px-6 md:px-8 py-5 max-w-4xl mx-auto">
+            <a href="/" class="flex items-center"><img src="assets/logo.svg" alt="LINR" class="h-8"></a>
+            <div class="flex items-center gap-4">
+                <div class="relative" id="lang-switcher">
+                    <button class="lang-btn flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-gold px-3 py-2 rounded-full hover:bg-surface-container transition-all duration-300 cursor-pointer">
+                        <span class="lang-code text-xs font-semibold">DE</span>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="lang-menu hidden absolute right-0 top-full mt-2 bg-surface-container border border-outline-variant/30 rounded-xl shadow-2xl py-2 min-w-[160px] z-[100] overflow-hidden"></div>
+                </div>
+                <a href="/" class="text-sm text-on-surface-variant hover:text-gold transition-colors">&larr; Zurück</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 md:px-8 py-12 md:py-20">
+        <h1 class="font-logo font-bold text-3xl md:text-4xl text-white mb-2">Nutzungsbedingungen</h1>
+        <p class="text-on-surface-variant mb-10">Stand: März 2026</p>
+
+        <div class="space-y-8 text-on-surface-variant leading-relaxed">
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">1. Geltungsbereich</h2>
+                <p>
+                    Diese Nutzungsbedingungen gelten für die Nutzung der mobilen Anwendung "LINR" (nachfolgend "App"), bereitgestellt von Nils Hillmann, 89deg, Rabienstr. 63, 27726 Worpswede (nachfolgend "Anbieter").
+                </p>
+                <p class="mt-3">
+                    Mit dem Download und der Nutzung der App erklärst du dich mit diesen Nutzungsbedingungen einverstanden.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">2. Beschreibung der App</h2>
+                <p>
+                    LINR ist eine persönliche Tagebuch-App für iOS und Android. Die App ermöglicht das Erstellen, Verwalten und Analysieren von Tagebucheinträgen. Alle Daten werden ausschließlich lokal auf dem Gerät des Nutzers gespeichert. Die App verfügt über keine Cloud-Anbindung und kein Backend.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">3. Kostenlose und Premium-Funktionen</h2>
+                <p>
+                    Die App bietet einen kostenlosen Funktionsumfang, der Kernfeatures wie Tagebucheinträge, Spracheingabe, Kalender, Basis-Statistiken, Flashbacks, Erfolge und Erinnerungen umfasst.
+                </p>
+                <p class="mt-3">
+                    Zusätzlich bietet LINR optionale Premium-Funktionen als Abonnement (monatlich oder jährlich). Dazu gehören KI-basierte Reflexionen (Mirror), Zusammenfassungen, erweiterte Statistiken und die Digest-Pipeline. Die Preise werden im jeweiligen App Store angezeigt.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">4. In-App-Käufe & Abonnements</h2>
+                <p>
+                    Die Abwicklung der In-App-Käufe erfolgt über Apple (StoreKit / App Store) bzw. Google (Google Play Billing). Es gelten die jeweiligen Kauf- und Erstattungsbedingungen von Apple bzw. Google.
+                </p>
+                <p class="mt-3">
+                    Abonnements verlängern sich automatisch, sofern sie nicht mindestens 24 Stunden vor Ablauf des aktuellen Zeitraums gekündigt werden. Die Kündigung erfolgt über die Abo-Verwaltung im jeweiligen App Store.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">5. Lokale Datenverarbeitung</h2>
+                <p>
+                    Alle Nutzerdaten (Einträge, Stimmungen, Bilder, Statistiken) werden ausschließlich lokal auf dem Gerät gespeichert. Der Anbieter hat keinen Zugriff auf diese Daten.
+                </p>
+                <p class="mt-3">
+                    Die KI-Features nutzen On-Device-Modelle (Apple Foundation Models auf iOS, Gemini Nano auf Android). Die Verarbeitung findet vollständig auf dem Gerät statt.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">6. Datenverlust</h2>
+                <p>
+                    Da alle Daten lokal gespeichert werden und kein Cloud-Backup durch den Anbieter angeboten wird, liegt die Verantwortung für die Sicherung der Daten beim Nutzer. LINR bietet eine JSON-Export-Funktion zur manuellen Datensicherung. Der Anbieter haftet nicht für Datenverlust durch Geräteschäden, Deinstallation oder sonstige Umstände.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">7. Verfügbarkeit der KI-Features</h2>
+                <p>
+                    Die KI-basierten Premium-Features sind abhängig von der Verfügbarkeit der On-Device-KI-Modelle auf dem jeweiligen Gerät. Auf iOS werden Apple Foundation Models ab iOS 26+ benötigt, auf Android ist Gemini Nano erforderlich. Der Anbieter garantiert nicht die Verfügbarkeit dieser Modelle auf allen Geräten.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">8. Geistiges Eigentum</h2>
+                <p>
+                    Alle Rechte an der App, dem Design, dem Namen "LINR" und den zugehörigen Materialien liegen beim Anbieter. Die Vervielfältigung, Bearbeitung oder Verbreitung der App oder ihrer Bestandteile außerhalb der bestimmungsgemäßen Nutzung ist untersagt.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">9. Haftungsbeschränkung</h2>
+                <p>
+                    Der Anbieter haftet nur für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit, die auf einer vorsätzlichen oder fahrlässigen Pflichtverletzung beruhen, sowie für sonstige Schäden bei Vorsatz oder grober Fahrlässigkeit. Eine weitergehende Haftung ist ausgeschlossen, soweit gesetzlich zulässig.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">10. Änderungen der Nutzungsbedingungen</h2>
+                <p>
+                    Der Anbieter behält sich vor, diese Nutzungsbedingungen jederzeit zu ändern. Über wesentliche Änderungen wird im Rahmen eines App-Updates informiert. Die fortgesetzte Nutzung der App nach Änderung gilt als Zustimmung zu den aktualisierten Bedingungen.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">11. Anwendbares Recht & Gerichtsstand</h2>
+                <p>
+                    Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist, soweit gesetzlich zulässig, der Sitz des Anbieters.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">12. Kontakt</h2>
+                <p>
+                    Bei Fragen zu diesen Nutzungsbedingungen erreichst du uns unter:<br>
+                    <a href="mailto:hello@89deg.com" class="text-gold hover:underline">hello@89deg.com</a>
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="w-full py-8 bg-surface-container-low border-t border-outline-variant/20">
+        <div class="flex flex-col md:flex-row justify-between items-center px-6 md:px-8 max-w-4xl mx-auto gap-3">
+            <p class="text-sm text-on-surface-variant">&copy; 2026 Nils Hillmann / 89deg</p>
+            <div class="flex gap-6">
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="/datenschutz">Datenschutz</a>
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="/impressum">Impressum</a>
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="/nutzungsbedingungen">Nutzungsbedingungen</a>
+            </div>
+        </div>
+    </footer>
+    <script src="i18n.js"></script>
+</body>
+</html>

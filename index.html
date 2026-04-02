@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>LINR — Für die Gedanken dazwischen</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "gold": "#F9EAC5",
+                        "gold-dim": "#E0CFA6",
+                        "gold-light": "#FDF5E6",
+                        "surface": "#0f0f0f",
+                        "surface-dim": "#0a0a0a",
+                        "surface-container": "#1a1a1a",
+                        "surface-container-low": "#141414",
+                        "surface-container-high": "#222222",
+                        "surface-container-highest": "#2a2a2a",
+                        "surface-container-lowest": "#111111",
+                        "surface-bright": "#1e1e1e",
+                        "on-surface": "#e8e8e8",
+                        "on-surface-variant": "#a0a0a0",
+                        "outline": "#555555",
+                        "outline-variant": "#333333",
+                        "gold-container": "rgba(249,234,197,0.12)",
+                        "gold-container-strong": "rgba(249,234,197,0.20)",
+                    },
+                    fontFamily: {
+                        "logo": ["Quicksand", "sans-serif"],
+                        "body": ["Inter", "system-ui", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem",
+                        "4xl": "2.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #F9EAC5 0%, #E0CFA6 100%);
+        }
+        .gold-glow {
+            box-shadow: 0 0 60px rgba(249, 234, 197, 0.15);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        html { scroll-behavior: smooth; }
+        ::selection {
+            background: rgba(200, 169, 98, 0.3);
+            color: #fff;
+        }
+        /* Hide scrollbar for bento overflow on mobile */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Fade-in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-delay-1 { transition-delay: 0.1s; }
+        .fade-in-delay-2 { transition-delay: 0.2s; }
+        .fade-in-delay-3 { transition-delay: 0.3s; }
+        .fade-in-delay-4 { transition-delay: 0.4s; }
+        .fade-in-delay-5 { transition-delay: 0.5s; }
+        .fade-in-delay-6 { transition-delay: 0.6s; }
+
+        /* Phone carousel */
+        .carousel-track { will-change: transform; }
+        .carousel-track.swiping { transition: none; }
+        .carousel-dot.active { background: #F9EAC5; transform: scale(1.3); }
+
+        /* i18n FOUC prevention */
+        body { opacity: 0; transition: opacity 0.15s ease; }
+        body.i18n-ready { opacity: 1; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased">
+
+    <!-- Navigation -->
+    <nav class="w-full top-0 z-[100] bg-surface/80 backdrop-blur-lg relative">
+        <div class="flex justify-between items-center px-6 md:px-8 py-5 max-w-7xl mx-auto">
+            <a href="/" class="flex items-center">
+                <img src="assets/logo.svg" alt="LINR" class="h-8">
+            </a>
+            <div class="flex items-center gap-4 md:gap-6">
+                <div class="hidden md:flex gap-1 text-sm font-medium text-on-surface-variant">
+                    <a class="hover:bg-surface-container-high transition-all duration-300 px-4 py-2 rounded-full hover:text-gold" href="#features" data-i18n="nav.features">Features</a>
+                    <a class="hover:bg-surface-container-high transition-all duration-300 px-4 py-2 rounded-full hover:text-gold" href="#premium" data-i18n="nav.premium">Premium</a>
+                    <a class="hover:bg-surface-container-high transition-all duration-300 px-4 py-2 rounded-full hover:text-gold" href="#privacy" data-i18n="nav.privacy">Privatsphäre</a>
+                </div>
+                <div class="relative" id="lang-switcher">
+                    <button class="lang-btn flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-gold px-3 py-2 rounded-full hover:bg-surface-container-high transition-all duration-300 cursor-pointer">
+                        <span class="lang-code text-xs font-semibold">DE</span>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="lang-menu hidden absolute right-0 top-full mt-2 bg-surface-container-high border border-outline-variant/30 rounded-xl shadow-2xl py-2 min-w-[160px] z-[100] overflow-hidden"></div>
+                </div>
+                <a href="#download" class="gold-gradient text-surface font-semibold px-5 py-2 rounded-full text-sm hover:brightness-110 transition-all duration-300" data-i18n="nav.download">
+                    Download
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <!-- Hero Section -->
+        <section class="relative pt-20 pb-16 md:pt-24 md:pb-20 px-6 md:px-8 max-w-7xl mx-auto overflow-hidden">
+            <canvas id="hero-particles" class="absolute inset-0 w-full h-full pointer-events-none z-0"></canvas>
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-7 z-10">
+                    <p class="fade-in text-gold font-medium text-sm tracking-widest uppercase mb-6" data-i18n="hero.label">Dein persönliches Tagebuch</p>
+                    <h1 class="fade-in fade-in-delay-1 font-logo font-bold text-4xl md:text-6xl lg:text-7xl text-white leading-[1.1] tracking-tight mb-8" data-i18n="hero.title">
+                        Für die Gedanken dazwischen.
+                    </h1>
+                    <p class="fade-in fade-in-delay-2 text-lg md:text-xl text-on-surface-variant max-w-xl mb-10 font-light leading-relaxed" data-i18n="hero.description">
+                        LINR ist dein privater Raum für Reflexion — komplett offline, mit KI auf deinem Gerät. Keine Cloud, keine Accounts, keine Kompromisse.
+                    </p>
+                    <div id="download" class="fade-in fade-in-delay-3 flex flex-col sm:flex-row gap-4">
+                        <a href="#" class="inline-flex items-center gap-3 bg-surface-container-high hover:bg-surface-container-highest text-white px-6 py-3.5 rounded-xl transition-all duration-300 border border-outline-variant">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            <div class="text-left">
+                                <div class="text-[10px] text-on-surface-variant leading-none" data-i18n="hero.appstore_label">Laden im</div>
+                                <div class="text-base font-semibold leading-tight">App Store</div>
+                            </div>
+                        </a>
+                        <a href="#" class="inline-flex items-center gap-3 bg-surface-container-high hover:bg-surface-container-highest text-white px-6 py-3.5 rounded-xl transition-all duration-300 border border-outline-variant">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33c.576.333.576 1.169 0 1.502l-2.302 1.33-2.489-2.08 2.489-2.082zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                            <div class="text-left">
+                                <div class="text-[10px] text-on-surface-variant leading-none" data-i18n="hero.gplay_label">Jetzt bei</div>
+                                <div class="text-base font-semibold leading-tight">Google Play</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:col-span-5 relative flex justify-center">
+                    <div class="fade-in fade-in-delay-4 relative">
+                        <div class="phone-frame w-64 md:w-72 rounded-[2.5rem] overflow-hidden shadow-2xl gold-glow border border-outline-variant/30 bg-surface-container relative">
+                            <!-- Notch -->
+                            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-6 bg-surface-container rounded-b-2xl z-20"></div>
+                            <!-- Swipe Carousel -->
+                            <div class="phone-carousel aspect-[9/19] relative touch-pan-y overflow-hidden">
+                                <div class="carousel-track flex h-full transition-transform duration-500 ease-out" style="transform: translateX(0%)">
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/01_flashbacks.jpg" alt="Flashbacks" data-i18n-alt="alt.flashbacks" class="w-full h-full object-cover" /></div>
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/02_ai_analysis.jpg" alt="KI-Analyse" data-i18n-alt="alt.ai_analysis" class="w-full h-full object-cover" /></div>
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/03_statistics.jpg" alt="Statistiken" data-i18n-alt="alt.statistics" class="w-full h-full object-cover" /></div>
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/04_mood_capture.jpg" alt="Stimmung erfassen" data-i18n-alt="alt.mood_capture" class="w-full h-full object-cover" /></div>
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/05_linr_summary.jpg" alt="LINR Zusammenfassung" data-i18n-alt="alt.summary" class="w-full h-full object-cover" /></div>
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/06_extended_stats.jpg" alt="Erweiterte Statistiken" data-i18n-alt="alt.extended_stats" class="w-full h-full object-cover" /></div>
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/07_calendar.jpg" alt="Kalender" data-i18n-alt="alt.calendar" class="w-full h-full object-cover" /></div>
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/08_entry_detail.jpg" alt="Eintrag Detail" data-i18n-alt="alt.entry_detail" class="w-full h-full object-cover" /></div>
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/09_security.jpg" alt="Sicherheit" data-i18n-alt="alt.security" class="w-full h-full object-cover" /></div>
+                                    <div class="carousel-slide min-w-full h-full"><img src="screenshots/de/10_appearance.jpg" alt="Erscheinungsbild" data-i18n-alt="alt.appearance" class="w-full h-full object-cover" /></div>
+                                </div>
+                                <!-- Dot Indicators -->
+                                <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-gold transition-all duration-300" data-index="0"></button>
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-all duration-300" data-index="1"></button>
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-all duration-300" data-index="2"></button>
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-all duration-300" data-index="3"></button>
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-all duration-300" data-index="4"></button>
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-all duration-300" data-index="5"></button>
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-all duration-300" data-index="6"></button>
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-all duration-300" data-index="7"></button>
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-all duration-300" data-index="8"></button>
+                                    <button class="carousel-dot w-1.5 h-1.5 rounded-full bg-white/30 transition-all duration-300" data-index="9"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Decorative glow -->
+                        <div class="absolute -bottom-16 -left-16 w-48 h-48 bg-gold/10 rounded-full blur-[80px]"></div>
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-gold/5 rounded-full blur-[60px]"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature: Spracheingabe -->
+        <section id="features" class="bg-surface-container py-20 md:py-28">
+            <div class="max-w-7xl mx-auto px-6 md:px-8">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="fade-in order-2 md:order-1">
+                        <div class="bg-surface-container-lowest p-8 md:p-10 rounded-2xl border border-outline-variant/30">
+                            <div class="flex items-center gap-4 mb-6">
+                                <div class="w-11 h-11 rounded-full bg-gold-container flex items-center justify-center">
+                                    <span class="material-symbols-outlined filled text-gold">mic</span>
+                                </div>
+                                <span class="font-logo font-bold text-gold text-sm" data-i18n="voice.label">Spracheingabe</span>
+                            </div>
+                            <h2 class="font-logo font-bold text-3xl md:text-4xl mb-5 tracking-tight text-white" data-i18n="voice.title">Sprich einfach drauflos.</h2>
+                            <p class="text-on-surface-variant text-base leading-relaxed mb-6" data-i18n="voice.description">
+                                Keine Lust zu tippen? LINR wandelt deine Stimme in Text um — und die On-Device-KI fasst das Ganze auf Wunsch zusammen. Bis zu 1500 Zeichen, direkt auf deinem Gerät verarbeitet.
+                            </p>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3 text-sm text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-gold text-lg">check_circle</span>
+                                    <span data-i18n="voice.check1">Voice-to-Text mit KI-Zusammenfassung</span>
+                                </div>
+                                <div class="flex items-center gap-3 text-sm text-on-surface-variant">
+                                    <span class="material-symbols-outlined text-gold text-lg">check_circle</span>
+                                    <span data-i18n="voice.check2">Komplett on-device — nichts verlässt dein Handy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 order-1 md:order-2">
+                        <div class="relative py-6">
+                            <!-- Placeholder für Feature-Screenshot -->
+                            <div class="rounded-2xl bg-surface-container-high border border-outline-variant/30 overflow-hidden aspect-[4/5] flex items-center justify-center">
+                                <div class="text-center px-8">
+                                    <span class="material-symbols-outlined filled text-gold/40 text-8xl mb-4 block">mic</span>
+                                    <p class="text-on-surface-variant text-sm" data-i18n="voice.screenshot">Screenshot: Spracheingabe</p>
+                                </div>
+                            </div>
+                            <div class="absolute -top-4 -right-4 glass-card p-4 rounded-xl shadow-lg">
+                                <p class="font-logo font-semibold text-gold text-sm italic" data-i18n="voice.quote">"Heute war ein guter Tag..."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature: Intelligent Insights (Bento Grid) -->
+        <section id="premium" class="py-20 md:py-32 bg-surface">
+            <div class="max-w-7xl mx-auto px-6 md:px-8">
+                <div class="fade-in mb-16 text-center md:text-left">
+                    <span class="bg-gold-container text-gold px-4 py-1.5 rounded-md text-xs font-bold tracking-widest uppercase mb-4 inline-block" data-i18n="analysis.label">Analyse</span>
+                    <h2 class="font-logo font-bold text-3xl md:text-5xl text-white tracking-tight" data-i18n="analysis.title">Versteh dich selbst besser.</h2>
+                </div>
+                <div class="grid md:grid-cols-12 gap-4 md:gap-6">
+                    <!-- Bento Box 1: Mood Patterns -->
+                    <div class="fade-in md:col-span-8 bg-surface-container-low rounded-2xl p-8 md:p-10 flex flex-col justify-between overflow-hidden relative min-h-[350px] border border-outline-variant/20">
+                        <div class="z-10">
+                            <h3 class="font-logo font-bold text-2xl md:text-3xl mb-3 text-white" data-i18n="analysis.mood_title">Stimmungsverlauf</h3>
+                            <p class="text-on-surface-variant max-w-md text-sm" data-i18n="analysis.mood_desc">Erkenne Muster in deinem emotionalen Alltag. Der Mood-Slider (0–100%) zeichnet deine Stimmung über Wochen und Monate auf — mit Kalender-Ansicht und farbigen Mood-Dots.</p>
+                        </div>
+                        <div class="mt-8 flex items-end gap-2 overflow-hidden z-10">
+                            <div class="h-24 w-10 bg-gold rounded-t-lg"></div>
+                            <div class="h-16 w-10 bg-gold/50 rounded-t-lg"></div>
+                            <div class="h-32 w-10 bg-gold rounded-t-lg"></div>
+                            <div class="h-20 w-10 bg-gold/40 rounded-t-lg"></div>
+                            <div class="h-28 w-10 bg-gold rounded-t-lg"></div>
+                            <div class="h-14 w-10 bg-gold/30 rounded-t-lg"></div>
+                            <div class="h-36 w-10 bg-gold rounded-t-lg"></div>
+                        </div>
+                        <div class="absolute top-0 right-0 p-6 opacity-[0.06]">
+                            <span class="material-symbols-outlined text-gold text-[10rem]">insights</span>
+                        </div>
+                    </div>
+
+                    <!-- Bento Box 2: Mirror -->
+                    <div class="fade-in fade-in-delay-1 md:col-span-4 bg-gold-container rounded-2xl p-8 md:p-10 flex flex-col justify-center border border-gold/10">
+                        <span class="material-symbols-outlined filled text-gold text-3xl mb-4">auto_awesome</span>
+                        <h3 class="font-logo font-bold text-xl md:text-2xl mb-3 text-white">Mirror</h3>
+                        <p class="text-on-surface-variant text-sm" data-i18n="analysis.mirror_desc">Tägliche KI-Reflexion zu deinem Eintrag. Dein persönlicher Spiegel, der dir hilft, tiefer zu blicken.</p>
+                        <span class="text-gold text-xs font-semibold mt-4 uppercase tracking-widest">Premium</span>
+                    </div>
+
+                    <!-- Bento Box 3: Zusammenfassungen -->
+                    <div class="fade-in fade-in-delay-2 md:col-span-4 bg-surface-container-highest rounded-2xl p-8 md:p-10 min-h-[280px] border border-outline-variant/20">
+                        <h3 class="font-logo font-bold text-xl md:text-2xl mb-3 text-gold" data-i18n="analysis.summaries_title">Zusammenfassungen</h3>
+                        <p class="text-on-surface-variant text-sm" data-i18n="analysis.summaries_desc">KI-generierte Wochen-, Monats- und Jahresübersichten. 48 verschiedene Schreibstile — von Neutral bis Brutal ehrlich.</p>
+                        <span class="text-gold text-xs font-semibold mt-4 inline-block uppercase tracking-widest">Premium</span>
+                    </div>
+
+                    <!-- Bento Box 4: Statistiken -->
+                    <div class="fade-in fade-in-delay-3 md:col-span-8 bg-surface-container rounded-2xl p-8 md:p-10 flex items-center justify-between gap-8 border border-outline-variant/20">
+                        <div class="max-w-sm">
+                            <h3 class="font-logo font-bold text-xl md:text-2xl mb-3 text-white" data-i18n="analysis.stats_title">Statistiken & Verbindungen</h3>
+                            <p class="text-on-surface-variant text-sm" data-i18n="analysis.stats_desc">Wochentags-Profil, Tag-Analyse, Schreibstatistiken — und im Premium: Personenranking, Thema des Monats und verborgene Verbindungen.</p>
+                        </div>
+                        <div class="hidden sm:flex w-28 h-28 rounded-full border-2 border-dashed border-gold/20 items-center justify-center flex-shrink-0">
+                            <span class="material-symbols-outlined text-gold text-3xl">hub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Grid: Kostenlose Features -->
+        <section class="py-20 md:py-28 bg-surface-container">
+            <div class="max-w-7xl mx-auto px-6 md:px-8">
+                <div class="fade-in mb-16 text-center">
+                    <h2 class="font-logo font-bold text-3xl md:text-5xl text-white tracking-tight mb-4" data-i18n="free.title">Alles was du brauchst. Kostenlos.</h2>
+                    <p class="text-on-surface-variant text-lg max-w-2xl mx-auto" data-i18n="free.subtitle">LINR gibt dir alle Werkzeuge für dein tägliches Journaling — ohne versteckte Kosten.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                    <div class="fade-in bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/20">
+                        <span class="material-symbols-outlined filled text-gold text-2xl mb-3 block">edit_note</span>
+                        <h4 class="font-logo font-bold text-white mb-2" data-i18n="free.diary_title">Tagebuch schreiben</h4>
+                        <p class="text-on-surface-variant text-sm" data-i18n="free.diary_desc">Text, Stimmung, Emotionen, Tags und Bilder — alles an einem Ort.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-1 bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/20">
+                        <span class="material-symbols-outlined filled text-gold text-2xl mb-3 block">calendar_month</span>
+                        <h4 class="font-logo font-bold text-white mb-2" data-i18n="free.calendar_title">Kalender-Ansicht</h4>
+                        <p class="text-on-surface-variant text-sm" data-i18n="free.calendar_desc">Dein Monat auf einen Blick — mit farbigen Mood-Dots für jeden Tag.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/20">
+                        <span class="material-symbols-outlined filled text-gold text-2xl mb-3 block">history</span>
+                        <h4 class="font-logo font-bold text-white mb-2" data-i18n="free.flashbacks_title">Flashbacks</h4>
+                        <p class="text-on-surface-variant text-sm" data-i18n="free.flashbacks_desc">"Erinnerst du dich?" — Karten mit alten Einträgen, die dich überraschen.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-3 bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/20">
+                        <span class="material-symbols-outlined filled text-gold text-2xl mb-3 block">emoji_events</span>
+                        <h4 class="font-logo font-bold text-white mb-2" data-i18n="free.badges_title">Erfolge & Badges</h4>
+                        <p class="text-on-surface-variant text-sm" data-i18n="free.badges_desc">Gamification mit Rängen — bleib motiviert und bau Streaks auf.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-4 bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/20">
+                        <span class="material-symbols-outlined filled text-gold text-2xl mb-3 block">notifications</span>
+                        <h4 class="font-logo font-bold text-white mb-2" data-i18n="free.reminders_title">Erinnerungen</h4>
+                        <p class="text-on-surface-variant text-sm" data-i18n="free.reminders_desc">Lokale Notifications, damit du das Schreiben nicht vergisst.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-5 bg-surface-container-lowest p-6 rounded-2xl border border-outline-variant/20">
+                        <span class="material-symbols-outlined filled text-gold text-2xl mb-3 block">download</span>
+                        <h4 class="font-logo font-bold text-white mb-2" data-i18n="free.export_title">Export & Backup</h4>
+                        <p class="text-on-surface-variant text-sm" data-i18n="free.export_desc">JSON Export/Import — deine Daten gehören dir, jederzeit.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy Section -->
+        <section id="privacy" class="py-20 md:py-28 bg-surface">
+            <div class="max-w-5xl mx-auto px-6 md:px-8 text-center">
+                <div class="fade-in inline-flex items-center justify-center w-16 h-16 rounded-full bg-gold-container mb-8">
+                    <span class="material-symbols-outlined filled text-gold text-3xl">lock</span>
+                </div>
+                <h2 class="fade-in fade-in-delay-1 font-logo font-bold text-3xl md:text-5xl text-white tracking-tight mb-6" data-i18n="privacy.title">Deine Gedanken. Dein Gerät. Punkt.</h2>
+                <p class="fade-in fade-in-delay-2 text-lg text-on-surface-variant leading-relaxed mb-12 max-w-3xl mx-auto" data-i18n="privacy.description">
+                    LINR hat kein Backend, keinen Cloud-Sync, kein Tracking. Alle Daten bleiben lokal auf deinem Gerät. Die KI läuft on-device mit Apple Intelligence und Gemini Nano — nichts wird jemals hochgeladen.
+                </p>
+                <div class="grid sm:grid-cols-3 gap-6">
+                    <div class="fade-in bg-surface-container p-6 rounded-2xl border border-outline-variant/20">
+                        <h4 class="font-logo font-bold text-gold mb-2" data-i18n="privacy.offline_title">100% Offline</h4>
+                        <p class="text-sm text-on-surface-variant" data-i18n="privacy.offline_desc">Kein Server, kein Account, keine Cloud. Alles bleibt auf deinem Gerät.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-1 bg-surface-container p-6 rounded-2xl border border-outline-variant/20">
+                        <h4 class="font-logo font-bold text-gold mb-2" data-i18n="privacy.ai_title">On-Device KI</h4>
+                        <p class="text-sm text-on-surface-variant" data-i18n="privacy.ai_desc">Apple Foundation Models & Gemini Nano — die KI verlässt nie dein Handy.</p>
+                    </div>
+                    <div class="fade-in fade-in-delay-2 bg-surface-container p-6 rounded-2xl border border-outline-variant/20">
+                        <h4 class="font-logo font-bold text-gold mb-2">Face ID / Passcode</h4>
+                        <p class="text-sm text-on-surface-variant" data-i18n="privacy.faceid_desc">Biometrische Sperre — nur du kommst an dein Tagebuch.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="py-20 px-6 md:px-8 max-w-7xl mx-auto">
+            <div class="fade-in gold-gradient rounded-3xl md:rounded-4xl p-10 md:p-20 text-center relative overflow-hidden">
+                <div class="z-10 relative">
+                    <h2 class="font-logo font-bold text-3xl md:text-5xl mb-6 tracking-tight text-surface" data-i18n="cta.title">Bereit für dein Tagebuch?</h2>
+                    <p class="text-lg md:text-xl mb-10 text-surface/80 max-w-2xl mx-auto font-light" data-i18n="cta.description">
+                        Lade LINR kostenlos herunter und fang an zu schreiben. Keine Registrierung, kein Setup — einfach loslegen.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#" class="inline-flex items-center justify-center gap-2 bg-surface text-gold px-8 py-4 rounded-full font-logo font-bold text-lg hover:bg-surface-dim transition-all duration-300 shadow-2xl">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            App Store
+                        </a>
+                        <a href="#" class="inline-flex items-center justify-center gap-2 bg-surface text-gold px-8 py-4 rounded-full font-logo font-bold text-lg hover:bg-surface-dim transition-all duration-300 shadow-2xl">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.199l2.302 1.33c.576.333.576 1.169 0 1.502l-2.302 1.33-2.489-2.08 2.489-2.082zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/></svg>
+                            Google Play
+                        </a>
+                    </div>
+                </div>
+                <div class="absolute top-0 right-0 w-80 h-80 bg-white/5 rounded-full blur-[100px] -mr-40 -mt-40"></div>
+                <div class="absolute bottom-0 left-0 w-52 h-52 bg-white/5 rounded-full blur-[80px] -ml-24 -mb-24"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-10 bg-surface-container-low border-t border-outline-variant/20">
+        <div class="flex flex-col md:flex-row justify-between items-center px-6 md:px-8 max-w-7xl mx-auto gap-4">
+            <div><img src="assets/logo.svg" alt="LINR" class="h-6"></div>
+            <p class="text-sm text-on-surface-variant">
+                <span data-i18n="footer.copyright">&copy; 2026 Nils Hillmann / 89deg. Alle Rechte vorbehalten.</span>
+            </p>
+            <div class="flex flex-wrap gap-4 md:gap-6 justify-center">
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="/datenschutz" data-i18n="footer.privacy">Datenschutz</a>
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="/impressum" data-i18n="footer.legal">Impressum</a>
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="/nutzungsbedingungen" data-i18n="footer.terms">Nutzungsbedingungen</a>
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="mailto:hello@89deg.com" data-i18n="footer.contact">Kontakt</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Gold dust particles — hero only
+        (() => {
+            const canvas = document.getElementById('hero-particles');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            const COUNT = 35;
+
+            function resize() {
+                const rect = canvas.parentElement.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
+            }
+
+            function createParticle() {
+                return {
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 0.5,
+                    speedX: (Math.random() - 0.5) * 0.3,
+                    speedY: Math.random() * -0.2 - 0.05,
+                    opacity: Math.random() * 0.4 + 0.1,
+                    drift: Math.random() * Math.PI * 2,
+                    driftSpeed: Math.random() * 0.005 + 0.002,
+                };
+            }
+
+            function init() {
+                resize();
+                particles = Array.from({ length: COUNT }, createParticle);
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.drift += p.driftSpeed;
+                    p.x += p.speedX + Math.sin(p.drift) * 0.2;
+                    p.y += p.speedY;
+
+                    if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
+                    if (p.x < -10) p.x = canvas.width + 10;
+                    if (p.x > canvas.width + 10) p.x = -10;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(249, 234, 197, ${p.opacity})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', resize);
+            init();
+            draw();
+        })();
+    </script>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+    <script src="i18n.js"></script>
+
+    <script>
+        // Phone swipe carousel
+        (() => {
+            const carousel = document.querySelector('.phone-carousel');
+            if (!carousel) return;
+            const track = carousel.querySelector('.carousel-track');
+            const dots = carousel.querySelectorAll('.carousel-dot');
+            const slideCount = carousel.querySelectorAll('.carousel-slide').length;
+            let current = 0;
+            let startX = 0;
+            let deltaX = 0;
+            let dragging = false;
+
+            function goTo(index) {
+                current = Math.max(0, Math.min(index, slideCount - 1));
+                track.style.transform = `translateX(-${current * 100}%)`;
+                dots.forEach((d, i) => {
+                    d.classList.toggle('active', i === current);
+                    d.style.background = i === current ? '#F9EAC5' : 'rgba(255,255,255,0.3)';
+                });
+            }
+
+            // Touch events
+            carousel.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+                dragging = true;
+                track.classList.add('swiping');
+            }, { passive: true });
+
+            carousel.addEventListener('touchmove', e => {
+                if (!dragging) return;
+                deltaX = e.touches[0].clientX - startX;
+                const offset = -current * 100 + (deltaX / carousel.offsetWidth) * 100;
+                track.style.transform = `translateX(${offset}%)`;
+            }, { passive: true });
+
+            carousel.addEventListener('touchend', () => {
+                dragging = false;
+                track.classList.remove('swiping');
+                const threshold = carousel.offsetWidth * 0.2;
+                if (deltaX < -threshold) goTo(current + 1);
+                else if (deltaX > threshold) goTo(current - 1);
+                else goTo(current);
+                deltaX = 0;
+            });
+
+            // Mouse drag for desktop
+            carousel.addEventListener('mousedown', e => {
+                startX = e.clientX;
+                dragging = true;
+                track.classList.add('swiping');
+                carousel.style.cursor = 'grabbing';
+                e.preventDefault();
+            });
+
+            window.addEventListener('mousemove', e => {
+                if (!dragging) return;
+                deltaX = e.clientX - startX;
+                const offset = -current * 100 + (deltaX / carousel.offsetWidth) * 100;
+                track.style.transform = `translateX(${offset}%)`;
+            });
+
+            window.addEventListener('mouseup', () => {
+                if (!dragging) return;
+                dragging = false;
+                track.classList.remove('swiping');
+                carousel.style.cursor = '';
+                const threshold = carousel.offsetWidth * 0.2;
+                if (deltaX < -threshold) goTo(current + 1);
+                else if (deltaX > threshold) goTo(current - 1);
+                else goTo(current);
+                deltaX = 0;
+            });
+
+            // Dot clicks
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => goTo(parseInt(dot.dataset.index)));
+            });
+
+            // Auto-advance every 4s, pause on interaction
+            let autoPlay = setInterval(() => goTo((current + 1) % slideCount), 4000);
+            carousel.addEventListener('mouseenter', () => clearInterval(autoPlay));
+            carousel.addEventListener('touchstart', () => clearInterval(autoPlay), { once: true });
+            carousel.addEventListener('mouseleave', () => {
+                autoPlay = setInterval(() => goTo((current + 1) % slideCount), 4000);
+            });
+
+            goTo(0);
+        })();
+    </script>
+</body>
+</html>

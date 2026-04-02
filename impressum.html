@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Impressum — LINR</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "gold": "#F9EAC5",
+                        "surface": "#0f0f0f",
+                        "surface-container": "#1a1a1a",
+                        "surface-container-low": "#141414",
+                        "on-surface": "#e8e8e8",
+                        "on-surface-variant": "#a0a0a0",
+                        "outline-variant": "#333333",
+                    },
+                    fontFamily: {
+                        "logo": ["Quicksand", "sans-serif"],
+                        "body": ["Inter", "system-ui", "sans-serif"],
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased">
+    <nav class="w-full bg-surface/80 backdrop-blur-lg border-b border-outline-variant/20">
+        <div class="flex justify-between items-center px-6 md:px-8 py-5 max-w-4xl mx-auto">
+            <a href="/" class="flex items-center"><img src="assets/logo.svg" alt="LINR" class="h-8"></a>
+            <div class="flex items-center gap-4">
+                <div class="relative" id="lang-switcher">
+                    <button class="lang-btn flex items-center gap-1.5 text-sm text-on-surface-variant hover:text-gold px-3 py-2 rounded-full hover:bg-surface-container transition-all duration-300 cursor-pointer">
+                        <span class="lang-code text-xs font-semibold">DE</span>
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                    </button>
+                    <div class="lang-menu hidden absolute right-0 top-full mt-2 bg-surface-container border border-outline-variant/30 rounded-xl shadow-2xl py-2 min-w-[160px] z-[100] overflow-hidden"></div>
+                </div>
+                <a href="/" class="text-sm text-on-surface-variant hover:text-gold transition-colors">&larr; Zurück</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 md:px-8 py-12 md:py-20">
+        <h1 class="font-logo font-bold text-3xl md:text-4xl text-white mb-10">Impressum</h1>
+
+        <div class="space-y-8 text-on-surface-variant leading-relaxed">
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">Angaben gemäß § 5 TMG</h2>
+                <p>
+                    Nils Hillmann<br>
+                    89deg (Einzelunternehmen / Nebengewerbe)<br>
+                    Rabienstr. 63<br>
+                    27726 Worpswede<br>
+                    Deutschland
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">Kontakt</h2>
+                <p>
+                    E-Mail: <a href="mailto:hello@89deg.com" class="text-gold hover:underline">hello@89deg.com</a>
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV</h2>
+                <p>
+                    Nils Hillmann<br>
+                    Rabienstr. 63<br>
+                    27726 Worpswede
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">Streitschlichtung</h2>
+                <p>
+                    Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit:
+                    <a href="https://ec.europa.eu/consumers/odr/" class="text-gold hover:underline" target="_blank" rel="noopener">https://ec.europa.eu/consumers/odr/</a>
+                </p>
+                <p class="mt-3">
+                    Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">Haftung für Inhalte</h2>
+                <p>
+                    Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
+                </p>
+            </section>
+
+            <section>
+                <h2 class="font-logo font-bold text-xl text-white mb-3">Haftung für Links</h2>
+                <p>
+                    Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="w-full py-8 bg-surface-container-low border-t border-outline-variant/20">
+        <div class="flex flex-col md:flex-row justify-between items-center px-6 md:px-8 max-w-4xl mx-auto gap-3">
+            <p class="text-sm text-on-surface-variant">&copy; 2026 Nils Hillmann / 89deg</p>
+            <div class="flex gap-6">
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="/datenschutz">Datenschutz</a>
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="/impressum">Impressum</a>
+                <a class="text-sm text-on-surface-variant hover:text-gold transition-colors" href="/nutzungsbedingungen">Nutzungsbedingungen</a>
+            </div>
+        </div>
+    </footer>
+    <script src="i18n.js"></script>
+</body>
+</html>
